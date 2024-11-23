@@ -5,7 +5,7 @@ Ce projet a pour objectif de développer un système de contrôle qualité basé
 
 Le système s'appuie sur la bibliothèque Detectron2, permettant une segmentation d'objets performante, ainsi que sur des calculs de distances entre les composants pour garantir leur positionnement correct. Une interface utilisateur intuitive a été développée pour afficher les résultats.
 
-#Fonctionnalités
+Fonctionnalités
 - Détection et segmentation des objets :
 Identification précise des composants des produits.
 
