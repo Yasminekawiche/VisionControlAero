@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distance Table</title>
+</head>
+<body>
+    <h1>Distance Table</h1>
+    <img id="distance-image" src="static\distances_image.jpg" alt="Distances Image">
+    <table border="1">
+        <tr>
+            <th>Pair</th>
+            <th>Distance (cm)</th>
+        </tr>
+        <tbody id="distance-table-body">
+            {% for row in distance_table %}
+            <tr>
+                <td>{{ row['Pair'] }}</td>
+                <td>{{ row['Distance (cm)'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to fetch distance table data from the backend
+            function fetchDistanceTable() {
+                fetch('/distance_table')
+                    .then(response => response.json())
+                    .then(data => {
+                        displayDistanceTable(data.distance_table);
+                        displayImage(data.image_path);
+                    })
+                    .catch(error => console.error('Error fetching distance table:', error));
+            }
+        
+            // Function to display the distance table
+            function displayDistanceTable(distanceTable) {
+                const tableBody = document.querySelector('#distance-table-body');
+                tableBody.innerHTML = ''; // Clear any existing content
+        
+                distanceTable.forEach(row => {
+                    const tr = document.createElement('tr');
+                    const tdPair = document.createElement('td');
+                    const tdDistance = document.createElement('td');
+        
+                    tdPair.textContent = row.Pair;
+                    tdDistance.textContent = row['Distance (cm)'];
+        
+                    tr.appendChild(tdPair);
+                    tr.appendChild(tdDistance);
+                    tableBody.appendChild(tr);
+                });
+            }
+        
+            // Function to display the image
+            function displayImage(imagePath) {
+                const imgElement = document.querySelector('#distance-image');
+                imgElement.src = `/static/distances_image.jpg}`;
+            }
+        
+            // Fetch the distance table data when the page loads
+            fetchDistanceTable();
+        });
+    </script>
+</body>
+</html>

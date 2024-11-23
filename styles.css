@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.header {
+    width: 100%;
+    background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url('../static/OIP.jpeg');
+    background-position: center;
+    background-size: cover;
+    padding: 10px 0;
+}
+
+nav {
+    display: flex;
+    padding: 0 2%;
+    align-items: center;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+}
+
+nav img {
+    width: 100px;
+    margin-right: 10px;
+}
+
+nav h1 {
+    font-size: 1.5em;
+    color: rgb(223, 6, 6); 
+
+}
+.reference-section {
+    text-align: center;
+    padding: 20px 0;
+    color: red;
+    background-color: #ddddddf0;
+    
+}
+
+.reference-section form {
+    display:inline-block;
+}
+
+.reference-section select, .reference-section button {
+    margin: 0 10px;
+}
+
+.main {
+    display: flex;
+    justify-content: left;
+    margin: 10px 10px;
+}
+
+.results-container {
+    display: flex;
+    width: 100%;
+}
+
+.text-column {
+    flex: 1;
+    margin-right: 20px; 
+    color: rgb(22, 2, 89); 
+}
+
+.image-column {
+    flex: 2;
+    text-align: center;
+}
+
+.class-counts h3 {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: rgb(22, 2, 89); 
+    border: 2px solid #333;
+}
+.class-counts h5 {
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: rgb(22, 2, 89); 
+    border: 2px solid #333;
+}
+
+.class-counts ul {
+    text-align: center;
+    color: red;
+}
+
+/* Predicted image styling */
+.predicted-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    zoom: 200%;
+    width: 100%;  
+}
+
+.predicted-image img {
+    max-width: 50%;
+    height: auto;
+}
+.ok-message {
+    color: rgba(0, 128, 0, 0.777);
+}
+
+.not-ok-message {
+    color: red;
+}
+.distance-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    zoom: 200%;
+    width: 100%; 
+}
+
+.distance-image img {
+    max-width:50%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .results-container {
+        flex-direction: column;
+    }
+
+    .text-column {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}

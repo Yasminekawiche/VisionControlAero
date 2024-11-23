@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control of Aeronautics Pieces</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="header">
+        <nav>
+            <div class="logo-title">
+                <img src="static/R.jpeg" alt="Logo">
+                <h1>Control of Aeronautic Pieces</h1>
+            </div>
+        </nav>
+    </div>
+
+    <div class="form-container">
+        <div class="reference-section">
+            <form id="referenceForm">
+                <label for="reference">Reference to Control:</label>
+                <select id="reference" name="reference">
+                    <option value="ENM426201003A">ENM426201003A</option>
+                    <option value="ENM426201007A">ENM426201007A</option>
+                    <option value="ENM426201021A">ENM426201021A</option>
+                    <option value="ENM426201008A">ENM426201008A</option>
+                    <option value="ENM426203151A">ENM426203151A</option>
+                    <option value="ENM426203831A">ENM426203831A</option>
+                    <option value="ENM426205002A">ENM426205002A</option>
+                    <option value="ENM426205007A">ENM426205007A</option>
+                    <option value="ENM426205009A">ENM426205009A</option>
+                </select>
+                <button type="button" onclick="fetchClassCounts()">Choose</button>
+            </form>
+
+            <form id="newReferenceForm" action="/add_reference" method="POST">
+                <label for="newReference">Add New Reference:</label>
+                <input type="text" id="newReference" name="newReference" required>
+                <button type="submit">Add Reference</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="results-container">
+            <div class="text-column">
+                <div class="class-counts">
+                    <h3>Objects Existence :</h3>
+                    <ul id="class-counts-list"></ul>
+                
+                    <h5>Distance Table : </h5>
+                    <div class="table-image">
+                        <img id="table-image" src="static/distance_table.png" alt="Table Image" style="display:none;">
+                    </div>
+                </div>            
+            </div>
+
+            <div class="image-column">
+                <h2>Predicted Image</h2>
+                <div class="predicted-image">
+                    <img id="predicted-image" src="static/predicted_image.jpg" alt="Predicted Image" style="display:none;">
+                </div>
+                <h2>Distance Image</h2>
+                <div class="distance-image">
+                    <img id="distance-image" src="static/distances_image.jpg" alt="Distance Image" style="display:none;">
+                </div>
+                
+            </div>            
+        </div>
+    </div>
+
+    <script>
+        function fetchClassCounts() {
+            const reference = document.getElementById('reference').value;
+        
+            fetch(`/class_counts?reference=${reference}`)
+                .then(response => response.json())
+                .then(data => {
+                    
+                    const classCountsList = document.getElementById('class-counts-list');
+                    classCountsList.innerHTML = '';
+        
+                    for (const [key, value] of Object.entries(data.class_counts)) {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${key}: ${value}`;
+                        
+                        // Apply color based on the content of the message
+                        if (value.includes('ok')) {
+                            listItem.classList.add('ok-message');
+                        } else if (value.includes('not ok')) {
+                            listItem.classList.add('not-ok-message');
+                        }
+                        
+                        classCountsList.appendChild(listItem);
+                    }
+    
+                    // Show the images
+                    const predictedImage = document.getElementById('predicted-image');
+                    predictedImage.src = 'static/predicted_image.jpg';
+                    predictedImage.style.display = 'block';
+    
+                    const distanceImage = document.getElementById('distance-image');
+                    distanceImage.src = 'static/distances_image.jpg'; 
+                    distanceImage.style.display = 'block';
+    
+                    const tableImage = document.getElementById('table-image');
+                    tableImage.src = 'static/distance_table.png'; 
+                    tableImage.style.display = 'block';
+                })
+                .catch(error => console.error('Error fetching class counts:', error));
+        }
+    </script>
+
+    
+</body>
+</html>
