@@ -19,3 +19,8 @@ Visualisation des résultats d'inspection via une interface web.
 Apprentissage profond : Detectron2
 Développement web : Flask, HTML, CSS, JavaScript
 Langage de programmation : Python
+
+- ## L'interface de mon projet
+![L'interface de mon projet](https://github.com/Yasminekawiche/VisionControlAero/blob/main/photo2.jpeg)
+
+L'interface de mon projet affiche la pièce segmentée avec les détails des objets détectés. Elle indique si la pièce est conforme aux exigences du cahier des charges : 'OK' si les objets sont présents avec le nombre attendu.
